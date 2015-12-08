@@ -55,6 +55,9 @@ else:
     Stats=[7,9,14,16]
     ExcProb=21
     Estimates=22
+    Variance=23
+    Conf_Low=24
+    Conf_Up=25
     Kval=26
 
 	# create empty lists and matrices to hold data
@@ -62,6 +65,9 @@ else:
     Sdf=numpy.zeros(shape = (len(FF_files),4))
     EPdf=numpy.zeros(shape = (len(FF_files),25))
     Estdf=numpy.zeros(shape = (len(FF_files),25))
+    Vdf=numpy.zeros(shape = (len(FF_files),25))
+    CLdf=numpy.zeros(shape = (len(FF_files),25))
+    CUdf=numpy.zeros(shape = (len(FF_files),25))
     Kdf=numpy.zeros(shape = (len(FF_files),25))
 
 	# loop through files and retrieve data
@@ -74,6 +80,12 @@ else:
         EPdf[count,]=EP
         Est=readLine(Estimates,gfile)
         Estdf[count,]=Est
+        V=readLine(Kval,gfile)
+        Vdf[count,]=V
+        CL=readLine(Conf_Low,gfile)
+        CLdf[count,]=CL
+        CU=readLine(Conf_Up,gfile)
+        CUdf[count,]=CU
         K=readLine(Kval,gfile)
         Kdf[count,]=K
         S = readMultLines(Stats,gfile)
@@ -82,9 +94,12 @@ else:
 
     # write output files
     out_Sdf = open("Stats.txt","w")
-    out_Edf = open("ExProb.txt","w")
-    out_Estdf = open("Est.txt","w")
-    out_Kdf = open("KValue.txt","w")
+    out_Edf = open("EXC_Prob.txt","w")
+    out_Estdf = open("Estimate.txt","w")
+    out_Vardf = open("Variance.txt","w")
+    out_CLdf = open("Conf_Low.txt","w")
+    out_CUdf = open("Conf_Up.txt","w")
+    out_Kdf = open("K-Value.txt","w")
     Sheader = "gage Skew StandDev RegSkew SysPeaks\n"
     out_Sdf.writelines(Sheader)
     for i in range(0,len(Gages)):
@@ -96,9 +111,18 @@ else:
         out_Edf.writelines(line2)
         line3 = Gages[i]+' '+' '.join(str(x) for x in Estdf[i,])+'\n'
         out_Estdf.writelines(line3)
-        line4 = Gages[i]+' '+' '.join(str(x) for x in Kdf[i,])+'\n'
-        out_Kdf.writelines(line4)
+        line4 = Gages[i]+' '+' '.join(str(x) for x in Vdf[i,])+'\n'
+        out_Vardf.writelines(line4)
+        line5 = Gages[i]+' '+' '.join(str(x) for x in CLdf[i,])+'\n'
+        out_CLdf.writelines(line5)
+        line6 = Gages[i]+' '+' '.join(str(x) for x in CUdf[i,])+'\n'
+        out_CUdf.writelines(line6)
+        line7 = Gages[i]+' '+' '.join(str(x) for x in Kdf[i,])+'\n'
+        out_Kdf.writelines(line7)
     out_Sdf.close()
     out_Edf.close()
     out_Estdf.close()
+    out_Vardf.close()
+    out_CLdf.close()
+    out_CUdf.close()
     out_Kdf.close()
