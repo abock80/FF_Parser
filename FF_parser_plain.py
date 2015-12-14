@@ -44,6 +44,7 @@ thisdir = os.getcwd()
 #dirsfiles = os.listdir(thisdir)
 # find flood frequency files and put them into a list
 FF_files=glob.glob("*.EXP")
+FF_files.sort()
 
 # message box for errors (if no .EXP files in folder location)
 if len(FF_files)==0:
@@ -78,16 +79,22 @@ else:
         print gfile
         EP=readLine(ExcProb,gfile)
         EPdf[count,]=EP
+
         Est=readLine(Estimates,gfile)
         Estdf[count,]=Est
-        V=readLine(Kval,gfile)
+
+        V=readLine(Variance,gfile)
         Vdf[count,]=V
+
         CL=readLine(Conf_Low,gfile)
         CLdf[count,]=CL
+
         CU=readLine(Conf_Up,gfile)
         CUdf[count,]=CU
+
         K=readLine(Kval,gfile)
         Kdf[count,]=K
+
         S = readMultLines(Stats,gfile)
         Sdf[count,]=S
         count = count+1
@@ -107,16 +114,22 @@ else:
         #current_var_float=[float(x) for x in current_var_str]
         line1 = Gages[i]+' '+' '.join(str(x) for x in Sdf[i,])+'\n'
         out_Sdf.writelines(line1)
+
         line2 = Gages[i]+' '+' '.join(str(x) for x in EPdf[i,])+'\n'
         out_Edf.writelines(line2)
+
         line3 = Gages[i]+' '+' '.join(str(x) for x in Estdf[i,])+'\n'
         out_Estdf.writelines(line3)
+
         line4 = Gages[i]+' '+' '.join(str(x) for x in Vdf[i,])+'\n'
         out_Vardf.writelines(line4)
+
         line5 = Gages[i]+' '+' '.join(str(x) for x in CLdf[i,])+'\n'
         out_CLdf.writelines(line5)
+
         line6 = Gages[i]+' '+' '.join(str(x) for x in CUdf[i,])+'\n'
         out_CUdf.writelines(line6)
+
         line7 = Gages[i]+' '+' '.join(str(x) for x in Kdf[i,])+'\n'
         out_Kdf.writelines(line7)
     out_Sdf.close()

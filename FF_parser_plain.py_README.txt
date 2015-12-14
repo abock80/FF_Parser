@@ -14,9 +14,11 @@ FF_parser_plain.py_README.txt				M.S. Kohn		8/19/2015
 
 4)  Est.txt has for each gage all the peak streamflows corresponding to the AEP's listed in ExProb.txt.  This is used in "FlowChar.txt"
 
-5)  KValue.txt has for each gage all the standard deviates for the LP3 distribution (K-Value) corresponding to the AEP's listed in ExProb.txt.  This is used in "LP3K.txt"
+5)  Variance.txt has for each gage all the variances for the LP3 distribution (K-Value) corresponding to the AEP's listed in ExProb.txt.  This is used in the report to compute weighted Q at site with a streamgage.
 
-6)  Stats.txt includes for each gage:
+6)  KValue.txt has for each gage all the standard deviates for the LP3 distribution (K-Value) corresponding to the AEP's listed in ExProb.txt.  This is used in "LP3K.txt"
+
+7)  Stats.txt includes for each gage:
     a) the station number also referred to as station ID.  This is used in column 1 of "SiteInfo.txt", "FlowChar.txt", "LP3G.txt", "LP3K.txt", and "LP3S.txt"
     b) the skew value (Skew) for the LP3 distribution and is independent of AEP.  This is used in "LP3G.txt"
     c) the standard deviation (StandDev) for the LP3 distribution and is independent of AEP.  This is used in "LP3S.txt"
